@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">ФизЛаб 3D</string>
+    <string name="title_activity_main">ФизЛаб 3D</string>
+    <string name="package_name">app.fizlab.course</string>
+    <string name="custom_url_scheme">app.fizlab.course</string>
+</resources>

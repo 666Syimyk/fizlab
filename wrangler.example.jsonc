@@ -1,0 +1,22 @@
+{
+  "name": "fizlab-course",
+  "main": "server/worker.mjs",
+  "compatibility_date": "2026-09-19",
+  "vars": {
+    "REVENUECAT_ENTITLEMENT_ID": "fizlab_pro",
+    "AUTH_EMAIL_ENABLED": "1"
+  },
+  "triggers": { "crons": ["0 * * * *"] },
+  "assets": {
+    "directory": "./dist/client",
+    "binding": "ASSETS",
+    "run_worker_first": true
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "fizlab-course",
+      "database_id": "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+    }
+  ]
+}

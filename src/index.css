@@ -1,0 +1,192 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Manrope", ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: #0a0a0c;
+  --color-surface: #101013;
+  --color-surface-2: #17171b;
+  --color-border: #232328;
+  --color-border-hover: #323238;
+  --color-foreground: #f4f4f5;
+  --color-muted: #a1a1aa;
+  --color-muted-2: #91919c;
+
+  --color-accent: #9b8afb;
+  --color-accent-strong: #6957df;
+  --color-accent-2: #5eead4;
+  --color-accent-foreground: #ffffff;
+
+  --color-danger: #f87171;
+  --color-success: #4ade80;
+
+  /* "backwards", not "both": a finished fill-forwards transform animation would keep trapping
+     position:fixed children (the pinned fullscreen simulation) inside the tab panel */
+  --animate-fade-up: fade-up 0.6s ease backwards;
+  --animate-glow: glow 3s ease-in-out infinite;
+  --animate-aurora-1: aurora-1 22s ease-in-out infinite alternate;
+  --animate-aurora-2: aurora-2 26s ease-in-out infinite alternate;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes glow {
+    0%,
+    100% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes aurora-1 {
+    0% {
+      transform: translate(0, 0) scale(1);
+    }
+    100% {
+      transform: translate(8%, 10%) scale(1.15);
+    }
+  }
+
+  @keyframes aurora-2 {
+    0% {
+      transform: translate(0, 0) scale(1.1);
+    }
+    100% {
+      transform: translate(-10%, -6%) scale(1);
+    }
+  }
+}
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+html,
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  margin: 0;
+  /* KaTeX's hidden accessibility MathML tree (.katex-mathml) contains deeply
+     nested table-like markup that can escape its own clip-path on complex
+     formulas and widen the document past the viewport, even though nothing
+     is visibly rendered there. Clip at the root so no such invisible content
+     can ever create a page-level horizontal scrollbar on mobile. */
+  overflow-x: clip;
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+#root {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent-2);
+  outline-offset: 3px;
+}
+
+html {
+  scroll-padding-top: 5rem;
+}
+
+p a {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background: var(--color-foreground);
+  color: var(--color-background);
+  transform: translateY(-180%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+@media (max-width: 640px), (pointer: coarse) {
+  input:not([type="range"]):not([type="checkbox"]):not([type="radio"]), select, textarea {
+    font-size: 16px;
+  }
+}
+
+@media (pointer: coarse) {
+  button, [role="tab"] {
+    min-height: 44px;
+  }
+}
+
+::selection {
+  background: color-mix(in oklab, var(--color-accent) 40%, transparent);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-hover);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted-2);
+}
+
+.katex {
+  font-size: 1.05em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
