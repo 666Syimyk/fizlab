@@ -9,6 +9,8 @@ for (const filename of fs.readdirSync('server')) {
     fs.copyFileSync(`server/${filename}`, `dist/server/${filename}`);
   }
 }
-fs.mkdirSync('dist/.openai', { recursive: true });
-fs.copyFileSync('.openai/hosting.json', 'dist/.openai/hosting.json');
+if (fs.existsSync('.openai/hosting.json')) {
+  fs.mkdirSync('dist/.openai', { recursive: true });
+  fs.copyFileSync('.openai/hosting.json', 'dist/.openai/hosting.json');
+}
 console.log('Site client and D1 Worker packaged.');
